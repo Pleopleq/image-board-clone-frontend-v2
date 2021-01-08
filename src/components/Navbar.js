@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components';
 
 const StyledNavbar = styled.nav`
@@ -12,10 +13,11 @@ const StyledNavbar = styled.nav`
 
 const Navbar = () => {
     return (
-    <StyledNavbar>
-        <p>Register</p>
-        <p>Login</p>
-    </StyledNavbar>
+        <StyledNavbar>
+            <p><Link to='/'>Feed</Link></p>
+            <p><Link to='/register'>Register</Link></p>
+            <p><Link to='/login'>Login</Link></p>
+        </StyledNavbar>
     )
 }
 
