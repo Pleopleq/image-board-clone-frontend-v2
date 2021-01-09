@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Post from "./Post";
 import styled from 'styled-components';
+import PostForm from './PostForm';
 
 const StyledFeed = styled.section`
     background: #001f3f;
@@ -9,7 +10,6 @@ const StyledFeed = styled.section`
     flex-direction: column;
     align-items:center;
 `
-
 
 const Feed = () => {
     const [posts, setPosts] = useState([])
@@ -21,9 +21,13 @@ const Feed = () => {
       }, []);
 
         return (
+        <>
+        <PostForm></PostForm>
+        <hr/>
         <StyledFeed>
             <Post posts={posts}></Post>
         </StyledFeed>
+        </>
     )
 }
 
