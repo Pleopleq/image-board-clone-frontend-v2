@@ -16,7 +16,7 @@ const StyledPostImage = styled.img`
     width: 50%
 `
 
-const Post = ({posts}) => {
+const Post = ({ posts }) => {
     return (
         posts.map(post => 
             <StyledPost key={post.id}>

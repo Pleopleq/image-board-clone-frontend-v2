@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Post from "./Post";
 import styled from 'styled-components';
 import PostForm from './PostForm';
@@ -11,16 +11,8 @@ const StyledFeed = styled.section`
     align-items:center;
 `
 
-const Feed = () => {
-    const [posts, setPosts] = useState([])
-
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/posts')
-            .then(response => response.json())
-            .then(json => setPosts(json))
-      }, []);
-
-        return (
+const Feed = ({ posts }) => {
+    return (
         <>
         <PostForm></PostForm>
         <hr/>
@@ -31,4 +23,5 @@ const Feed = () => {
     )
 }
 
-export default Feed
+
+export default Feed;
