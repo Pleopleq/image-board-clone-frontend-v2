@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchPosts } from './reducers/postReducer'
+import { fetchPosts, savePost } from './reducers/postReducer'
+import { addPost } from './actions/actions';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Navbar from "./components/Navbar"
 import Feed from "./components/Feed";
@@ -11,8 +12,16 @@ const App = () => {
   const posts = useSelector((state) => state.posts)
   const dispatch = useDispatch()
 
+  const onAddPost = (post) => {
+    dispatch(addPost(post))
+  }
+
+  const onSave = () => {
+    dispatch(savePost())
+  }
+
   const onLoad = () => {
-      dispatch(fetchPosts());
+    dispatch(fetchPosts());
   };
 
   useEffect(() => {
@@ -20,7 +29,7 @@ const App = () => {
   }, [])
 
   const FeedWrapper = () => {
-    return <Feed posts={posts}></Feed>
+    return <Feed posts={posts} addPost={onAddPost} onSavePost={onSave}></Feed>
   }
   return (
     <>

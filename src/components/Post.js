@@ -19,10 +19,10 @@ const StyledPostImage = styled.img`
 const Post = ({ postId, title, postBody }) => {
     return (
             <StyledPost key={postId}>
-            <h1>{title}</h1>
-            <StyledPostImage src="https://www.colorcombos.com/images/colors/010101.png"></StyledPostImage>
-            <p>Author: author.</p>
-            <p>{postBody}</p>
+                <h1>{title}</h1>
+                <StyledPostImage src="https://www.colorcombos.com/images/colors/010101.png"></StyledPostImage>
+                <p>Author: author.</p>
+                <p>{postBody}</p>
             </StyledPost>
     )
 }

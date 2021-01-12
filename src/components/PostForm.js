@@ -13,7 +13,7 @@ const StyledPostForm = styled.section`
     align-items:center;
 `
 
-const PostForm = () => {
+const PostForm = ({ savePost , addPost }) => {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
 
@@ -23,16 +23,10 @@ const PostForm = () => {
             title,
             body
         }
-
-        fetch('https://jsonplaceholder.typicode.com/posts', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(post)
-        })
-            .then(response => response.json())
-            .then(json => console.log(json))
+        addPost(post)
+        savePost()
+        setTitle('')
+        setBody('')
     }
 
 
