@@ -17,7 +17,15 @@ const Feed = ({ posts }) => {
         <PostForm></PostForm>
         <hr/>
         <StyledFeed>
-            <Post posts={posts}></Post>
+            {posts.map(post =>
+            <Post 
+            key={post.id}
+            postId={post.id}
+            title={post.title}
+            postBody={post.body}
+            ></Post>
+            )
+            }
         </StyledFeed>
         </>
     )

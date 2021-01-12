@@ -16,16 +16,14 @@ const StyledPostImage = styled.img`
     width: 50%
 `
 
-const Post = ({ posts }) => {
+const Post = ({ postId, title, postBody }) => {
     return (
-        posts.map(post => 
-            <StyledPost key={post.id}>
-            <h1>{post.title}</h1>
+            <StyledPost key={postId}>
+            <h1>{title}</h1>
             <StyledPostImage src="https://www.colorcombos.com/images/colors/010101.png"></StyledPostImage>
             <p>Author: author.</p>
-            <p>{post.body}</p>
+            <p>{postBody}</p>
             </StyledPost>
-        ) 
     )
 }
 
