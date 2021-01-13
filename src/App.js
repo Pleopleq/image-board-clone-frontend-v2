@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPosts, savePost } from './reducers/postReducer'
-import { addPost } from './actions/actions';
+import { addPost } from './actions/posts';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Navbar from "./components/Navbar"
 import Feed from "./components/Feed";

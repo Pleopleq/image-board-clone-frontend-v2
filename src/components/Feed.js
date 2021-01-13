@@ -12,18 +12,18 @@ const StyledFeed = styled.section`
 `
 
 const Feed = ({ posts, addPost, onSavePost }) => {
-    const reversedPosts = posts.reverse()
     return (
         <>
         <PostForm addPost={addPost} savePost={onSavePost}></PostForm>
         <hr/>
         <StyledFeed>
-            {reversedPosts.map((post, index) =>
+            {posts.map((post, index) =>
             <Post 
             key={index}
             postId={post.id}
             title={post.title}
-            postBody={post.body}
+            author={post.author}
+            postBody={post.content}
             ></Post>
             )}
         </StyledFeed>

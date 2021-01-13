@@ -16,12 +16,12 @@ const StyledPostImage = styled.img`
     width: 50%
 `
 
-const Post = ({ postId, title, postBody }) => {
+const Post = ({ postId, title, author, postBody }) => {
     return (
             <StyledPost key={postId}>
                 <h1>{title}</h1>
                 <StyledPostImage src="https://www.colorcombos.com/images/colors/010101.png"></StyledPostImage>
-                <p>Author: author.</p>
+                <p>Author: {author}</p>
                 <p>{postBody}</p>
             </StyledPost>
     )

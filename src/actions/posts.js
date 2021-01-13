@@ -1,5 +1,4 @@
-export const FETCH_POSTS = 'FETCH_POSTS';
-export const NEW_POST = 'NEW_POST';
+import { FETCH_POSTS, NEW_POST } from './type'
 
 export const setPosts = (posts) => ({
     type: FETCH_POSTS,

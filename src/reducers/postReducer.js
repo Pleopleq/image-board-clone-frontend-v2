@@ -1,4 +1,5 @@
-import { FETCH_POSTS, setPosts, NEW_POST } from '../actions/actions';
+import { setPosts } from '../actions/posts';
+import { FETCH_POSTS, NEW_POST } from '../actions/type'
 
 const initialState = {
     posts: []
@@ -22,13 +23,13 @@ export default function postReducer(state = initialState, action) {
 }
 
 export const fetchPosts = () => async (dispatch, getState) => {
-    const posts = await fetch('https://jsonplaceholder.typicode.com/posts').then(res => res.json())
+    const posts = await fetch('http://localhost:3001/api/posts').then(res => res.json())
     dispatch(setPosts(posts))
 }
 
 export const savePost = () => async (dispatch, getState) => {
     const posts = getState().posts
-    await fetch('https://jsonplaceholder.typicode.com/posts', {
+    await fetch('http://localhost:3001/api/posts', {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
