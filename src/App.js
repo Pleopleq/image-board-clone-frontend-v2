@@ -6,29 +6,6 @@ import Register from "./components/Register";
 import Login from "./components/Login"
 
 const App = () => {
-/*   const posts = useSelector((state) => state.posts.posts)
-  const state = useSelector((state) => state)
-  const dispatch = useDispatch()
-  console.log(state)
-  const onAddPost = (post) => {
-    dispatch(addPost(post))
-  }
-
-  const onSave = () => {
-    dispatch(savePost())
-  }
-
-  const onLoad = () => {
-    dispatch(fetchPosts());
-  };
-
-  useEffect(() => {
-      onLoad()
-  }, [])
-
-  const FeedWrapper = () => {
-    return <Feed posts={posts} addPost={onAddPost} onSavePost={onSave}></Feed>
-  } */
   return (
     <>
     <Router>
