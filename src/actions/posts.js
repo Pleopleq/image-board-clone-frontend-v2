@@ -1,4 +1,5 @@
 import { FETCH_POSTS, NEW_POST } from './type'
+import postServices from '../services/post'
 
 export const setPosts = (posts) => ({
     type: FETCH_POSTS,
@@ -11,17 +12,11 @@ export const addPost = (post) => ({
 })
 
 export const fetchPosts = () => async (dispatch, getState) => {
-  const posts = await fetch('http://localhost:3001/api/posts').then(res => res.json())
+  const posts = await postServices.getAll()
   dispatch(setPosts(posts))
 }
 
 export const savePost = () => async (dispatch, getState) => {
   const posts = getState().posts
-  await fetch('http://localhost:3001/api/posts', {
-      method: 'POST',
-      headers: {
-          'content-type': 'application/json'
-      },
-      body: JSON.stringify(posts)
-  })
+  await postServices.addNewPost(posts)
 }
