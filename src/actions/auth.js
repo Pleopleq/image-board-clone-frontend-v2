@@ -5,7 +5,7 @@ import {
     LOGIN_FAIL,
     LOGOUT,
     SET_MESSAGE,
-} from "./types";
+} from "./type";
 import loginService from '../services/login'
 
 export const login = credentials => (dispatch) => {

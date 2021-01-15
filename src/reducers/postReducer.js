@@ -1,21 +1,21 @@
 import { setPosts } from '../actions/posts';
 import { FETCH_POSTS, NEW_POST } from '../actions/type'
 
-const initialState = {
-    posts: []
-}
+const initialState = {}
 
 export default function postReducer(state = initialState, action) {
-    switch (action.type) {
+    const { type, payload } = action
+
+    switch (type) {
         case FETCH_POSTS:
             return {
                 ...state,
-                posts: action.payload
+                posts: payload
             }
         case NEW_POST:
             return {
                 ...state,
-                posts: [...state.posts, action.payload]
+                posts: [...state.posts, payload]
             }
         default:
             return state;

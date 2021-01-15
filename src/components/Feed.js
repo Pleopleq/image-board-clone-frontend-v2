@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchPosts, savePost, addPost } from '../actions/posts'
 import Post from "./Post";
 import styled from 'styled-components';
 import PostForm from './PostForm';
@@ -11,13 +13,31 @@ const StyledFeed = styled.section`
     align-items:center;
 `
 
-const Feed = ({ posts, addPost, onSavePost }) => {
-    return (
-        <>
-        <PostForm addPost={addPost} savePost={onSavePost}></PostForm>
-        <hr/>
-        <StyledFeed>
-            {posts.map((post, index) =>
+const Feed = () => {
+    const posts = useSelector((state) => state.posts.posts)
+    const dispatch = useDispatch()
+
+    const onAddPost = (post) => {
+    dispatch(addPost(post))
+    }
+
+    const onSave = () => {
+    dispatch(savePost())
+    }
+
+    const onLoad = useCallback(() => {
+        dispatch(fetchPosts());
+    }, [dispatch]);
+
+    useEffect(() => {
+        onLoad()
+    }, [onLoad])
+
+    function handlePostRender() {
+        if(!posts){
+            return null
+        } else {
+            return (posts.map((post, index) =>
             <Post 
             key={index}
             postId={post.id}
@@ -25,7 +45,16 @@ const Feed = ({ posts, addPost, onSavePost }) => {
             author={post.author}
             postBody={post.content}
             ></Post>
-            )}
+            ))
+        }
+    }
+
+    return (
+        <>
+        <PostForm addPost={onAddPost} savePost={onSave}></PostForm>
+        <hr/>
+        <StyledFeed>
+            {handlePostRender()}
         </StyledFeed>
         </>
     )
