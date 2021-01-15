@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import { login } from '../actions/auth'
 import styled from 'styled-components';
 
 const StyledLoginForm = styled.section`
@@ -15,24 +18,41 @@ const StyledLabel = styled.label`
     color: #7FDBFF;
 `
 
-const Login = () => {
+const Login = (props) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
-    function onLoginSubmit(){
-        const login = {
+    const { isLoggedIn } = useSelector(state => state.auth)
+
+    const dispatch = useDispatch()
+
+    function onLoginSubmit(e){
+        e.preventDefault()
+
+        const loginFields = {
             username,
             password
         }
+
+        dispatch(login(loginFields))
+            .then(() => {
+                props.history.push("/")
+                window.location.reload()
+            })
+
         setUsername('')
         setPassword('')
+    }
+
+    if (isLoggedIn) {
+        return <Redirect to="/" />;
     }
 
     return (
         <>
         <StyledLoginForm>
             <StyledTitle>Login</StyledTitle>
-            <form>
+            <form onSubmit={onLoginSubmit}>
                 <div>
                     <StyledLabel>Username</StyledLabel><br/>
                     <input
