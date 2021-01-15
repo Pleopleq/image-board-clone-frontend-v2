@@ -1,4 +1,6 @@
-import React, { useState }from 'react'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import NeedToBeLogged from './NeedToBeLogged'
 import styled from 'styled-components'
 
 const StyledTitle = styled.h1`
@@ -16,6 +18,7 @@ const StyledPostForm = styled.section`
 const PostForm = ({ savePost , addPost }) => {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
+    const { isLoggedIn } = useSelector(state => state.auth)
 
     function handleFormSubmit(e) {
         e.preventDefault()
@@ -29,9 +32,12 @@ const PostForm = ({ savePost , addPost }) => {
         setBody('')
     }
 
-
-    return (
-        <StyledPostForm>
+    function displayForm() {
+        if(!isLoggedIn) {
+            return <NeedToBeLogged></NeedToBeLogged>
+        }
+        return (
+            <StyledPostForm>
             <StyledTitle>Add post</StyledTitle>
             <form onSubmit={handleFormSubmit}>
                 <div>
@@ -46,6 +52,13 @@ const PostForm = ({ savePost , addPost }) => {
                 <button type="submit">Submit</button>
             </form>
         </StyledPostForm>
+        )
+    }
+
+    return ( 
+        <>
+        {displayForm()}
+        </>
     )
 }
 

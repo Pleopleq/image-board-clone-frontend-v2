@@ -46,7 +46,7 @@ export const login = credentials => (dispatch) => {
     )
 }
 
-export const logout = (dispatch) => {
+export const logout = () => (dispatch) => {
     loginService.logout()
     dispatch(userLogout())
 }

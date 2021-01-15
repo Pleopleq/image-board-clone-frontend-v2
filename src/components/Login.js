@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, useHistory  } from 'react-router-dom'
 import { login } from '../actions/auth'
 import styled from 'styled-components';
 
@@ -21,6 +21,7 @@ const StyledLabel = styled.label`
 const Login = (props) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const history = useHistory()
 
     const { isLoggedIn } = useSelector(state => state.auth)
 
@@ -36,7 +37,7 @@ const Login = (props) => {
 
         dispatch(login(loginFields))
             .then(() => {
-                props.history.push("/")
+                history.push("/")
                 window.location.reload()
             })
 

@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../actions/auth'
 import styled from 'styled-components';
 
 const StyledNavbar = styled.nav`
@@ -14,13 +16,21 @@ const StyledNavbar = styled.nav`
 
 const Navbar = () => {
     const { isLoggedIn } = useSelector(state => state.auth)
+    const history = useHistory()
+    const dispatch = useDispatch()
 
-    const loggedInNavbar = () => {
+    function handleLogout(){
+        dispatch(logout())
+        history.push("/")
+        window.location.reload()
+    }
+
+    function loggedInNavbar(){
         if(isLoggedIn) {
             return (
             <>
                 <p><Link to='/profile'>Profile</Link></p>
-                <p><Link to='/logout'>Logout</Link></p>
+                <p><Link onClick={handleLogout}>Logout</Link></p>
             </>
             )
         }
@@ -32,6 +42,7 @@ const Navbar = () => {
         </>
         )
     }
+
     return (
         <StyledNavbar>
             <p><Link to='/'>Feed</Link></p>
