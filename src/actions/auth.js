@@ -8,13 +8,28 @@ import {
 } from "./type";
 import loginService from '../services/login'
 
+export const userLogin = (response) => ({
+    type: LOGIN_SUCCESS,
+    payload: { user: response }
+})
+
+export const userLoginFail = () => ({
+    type: LOGIN_FAIL
+})
+
+export const setMessage = (message) => ({
+    type: SET_MESSAGE,
+    payload: message
+})
+
+export const userLogout = () => ({
+    type: LOGOUT
+})
+
 export const login = credentials => (dispatch) => {
     return loginService.login(credentials).then(
         response => {
-            dispatch({
-                type:LOGIN_SUCCESS,
-                payload: { user: response }
-            })
+            dispatch(userLogin(response))
             return Promise.resolve()
         },
         (error) => {
@@ -23,14 +38,8 @@ export const login = credentials => (dispatch) => {
                 error.response.data.message) ||
               error.message ||
               error.toString();
-              dispatch({
-                  type: LOGIN_FAIL,
-              })
-
-              dispatch({
-                  type: SET_MESSAGE,
-                  payload:message,
-              })
+              dispatch(userLoginFail())
+              dispatch(setMessage(message))
 
               return Promise.reject()
         } 
@@ -39,8 +48,5 @@ export const login = credentials => (dispatch) => {
 
 export const logout = (dispatch) => {
     loginService.logout()
-
-    dispatch({
-        type: LOGOUT,
-    })
+    dispatch(userLogout())
 }
