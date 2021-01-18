@@ -16,7 +16,7 @@ export const fetchPosts = () => async (dispatch, getState) => {
   dispatch(setPosts(posts))
 }
 
-export const savePost = () => async (dispatch, getState) => {
-  const posts = getState().posts
-  await postServices.addNewPost(posts)
+export const savePost = (post, token) => async (dispatch, getState) => {
+  const newPost = await postServices.addNewPost( post, token)
+  dispatch(addPost(newPost))
 }

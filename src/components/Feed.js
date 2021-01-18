@@ -21,8 +21,8 @@ const Feed = () => {
     dispatch(addPost(post))
     }
 
-    const onSave = () => {
-    dispatch(savePost())
+    const onSave = (post, token) => {
+    dispatch(savePost(post, token))
     }
 
     const onLoad = useCallback(() => {

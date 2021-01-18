@@ -18,16 +18,18 @@ const StyledPostForm = styled.section`
 const PostForm = ({ savePost , addPost }) => {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
-    const { isLoggedIn } = useSelector(state => state.auth)
-
+    const { isLoggedIn, user } = useSelector(state => state.auth)
+    
     function handleFormSubmit(e) {
         e.preventDefault()
         const post = {
             title,
-            body
+            likes: 0,
+            content: body,
+            author: user.loggedUser.username,
+            owner: user.loggedUser._id
         }
-        addPost(post)
-        savePost()
+        savePost(post, user.token)
         setTitle('')
         setBody('')
     }
