@@ -23,8 +23,6 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const history = useHistory()
 
-    const { isLoggedIn } = useSelector(state => state.auth)
-
     const dispatch = useDispatch()
 
     function onLoginSubmit(e){

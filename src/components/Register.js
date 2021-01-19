@@ -22,7 +22,6 @@ const Register = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const history = useHistory()
-    const { isLoggedIn } = useSelector(state => state.auth)
 
     const dispatch = useDispatch()
 
