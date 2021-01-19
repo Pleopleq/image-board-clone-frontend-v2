@@ -6,7 +6,13 @@ import {
     LOGOUT,
     SET_MESSAGE,
 } from "./type";
-import loginService from '../services/login'
+
+import authService from '../services/auth'
+
+export const registerAction = (response) => ({
+    type: REGISTER_SUCCESS,
+    payload: { user: response }
+})
 
 export const userLogin = (response) => ({
     type: LOGIN_SUCCESS,
@@ -26,27 +32,17 @@ export const userLogout = () => ({
     type: LOGOUT
 })
 
-export const login = credentials => (dispatch) => {
-    return loginService.login(credentials).then(
-        response => {
-            dispatch(userLogin(response))
-            return Promise.resolve()
-        },
-        (error) => {
-            const message = (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
-              error.message ||
-              error.toString();
-              dispatch(userLoginFail())
-              dispatch(setMessage(message))
+export const register = newUserInfo => async (dispatch) => {
+    const response = await authService.register(newUserInfo)
+    dispatch(registerAction(response))
+}
 
-              return Promise.reject()
-        } 
-    )
+export const login = credentials => async (dispatch) => {
+    const response = await authService.login(credentials)
+    dispatch(userLogin(response))
 }
 
 export const logout = () => (dispatch) => {
-    loginService.logout()
+    authService.logout()
     dispatch(userLogout())
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Redirect, useHistory  } from 'react-router-dom'
+import { useHistory  } from 'react-router-dom'
 import { login } from '../actions/auth'
 import styled from 'styled-components';
 
@@ -18,7 +18,7 @@ const StyledLabel = styled.label`
     color: #7FDBFF;
 `
 
-const Login = (props) => {
+const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const history = useHistory()
@@ -45,10 +45,6 @@ const Login = (props) => {
         setPassword('')
     }
 
-    if (isLoggedIn) {
-        return <Redirect to="/" />;
-    }
-
     return (
         <>
         <StyledLoginForm>
@@ -68,7 +64,7 @@ const Login = (props) => {
                     <StyledLabel>Password</StyledLabel><br/>
                     <input
                     value={password}
-                    type="text"
+                    type="password"
                     name="password"
                     placeholder="Password"
                     onChange={(e) => setPassword(e.target.value)}

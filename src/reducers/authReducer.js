@@ -15,6 +15,12 @@ const initialState = user
 export default function authReducer(state = initialState, action) {
     const { type, payload } = action
     switch (type) {
+        case REGISTER_SUCCESS:
+            return {
+                ...state,
+                isLoggedIn: true,
+                user: payload.user
+            }
         case LOGIN_SUCCESS:
             return{
                 ...state,
