@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory  } from 'react-router-dom'
-import { register, login } from '../actions/auth'
+import { Redirect } from 'react-router-dom'
+import { register } from '../actions/auth'
+import { clearMessage, setMessage } from '../actions/message';
 import styled from "styled-components";
 
 const StyledLoginForm = styled.section`
@@ -21,9 +22,14 @@ const StyledLabel = styled.label`
 const Register = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const history = useHistory()
+    const { isLoggedIn } = useSelector(state => state.auth);
+    const { message } = useSelector(state => state.message)
 
     const dispatch = useDispatch()
+
+    function clearAlert() {
+        dispatch(clearMessage())
+    }
 
     function onRegisterSubmit(e){
         e.preventDefault()
@@ -33,14 +39,18 @@ const Register = () => {
             password
         }
 
-        dispatch(register(registerFields))
-            .then(() => {
-                dispatch(login(registerFields))
-                history.push("/")
-            })
+        if (registerFields.username === "" && registerFields.password === "") {
+            return dispatch(setMessage("Please fill all the inputs."))
+        }
 
+        dispatch(register(registerFields))
+        clearAlert()
         setUsername('')
         setPassword('')
+    }
+
+    if(isLoggedIn) {
+        return <Redirect to="/" />;
     }
 
     return (
@@ -56,6 +66,7 @@ const Register = () => {
                     name="username"
                     placeholder="Username"
                     onChange={(e) => setUsername(e.target.value)}
+                    onClickCapture={clearAlert}
                     />
                 </div>
                 <div>
@@ -66,11 +77,15 @@ const Register = () => {
                     name="password"
                     placeholder="Password"
                     onChange={(e) => setPassword(e.target.value)}
+                    onClickCapture={clearAlert}
                     />
                 </div>
                 <br/>
                 <button type="submit">Log in</button>
             </form>
+            <div>
+                <StyledTitle>{message}</StyledTitle>
+            </div>
         </StyledLoginForm>
         </>
     )

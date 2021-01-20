@@ -7,6 +7,7 @@ import {
     SET_MESSAGE,
 } from "./type";
 
+import {errorFormatter, errorHandler} from '../utils/errorHandler'
 import authService from '../services/auth'
 
 export const registerAction = (response) => ({
@@ -34,11 +35,24 @@ export const userLogout = () => ({
 
 export const register = newUserInfo => async (dispatch) => {
     const response = await authService.register(newUserInfo)
+    if(response.data.error) {
+        const error = errorFormatter(response.data.error) 
+        dispatch(userLoginFail())
+        dispatch(setMessage(errorHandler(error)))
+        return
+    }
+
     dispatch(registerAction(response))
 }
 
 export const login = credentials => async (dispatch) => {
     const response = await authService.login(credentials)
+
+    /* if(response === undefined) {
+        dispatch(userLoginFail())
+        dispatch(setMessage("Invalid username or password."))
+        return   
+    } */
     dispatch(userLogin(response))
 }
 

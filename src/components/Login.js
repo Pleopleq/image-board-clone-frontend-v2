@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory  } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { login } from '../actions/auth'
 import styled from 'styled-components';
+import { clearMessage } from '../actions/message';
 
 const StyledLoginForm = styled.section`
     background: #001f3f;
@@ -21,9 +22,21 @@ const StyledLabel = styled.label`
 const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const history = useHistory()
-
+    const { isLoggedIn } = useSelector(state => state.auth);
+    const { message } = useSelector(state => state.message)
     const dispatch = useDispatch()
+
+    function handleUsernameInput(e) {
+        setUsername(e.target.value)
+    }
+
+    function handlePasswordInput(e) {
+        setPassword(e.target.value)
+    }
+
+    function clearAlert() {
+        dispatch(clearMessage())
+    }
 
     function onLoginSubmit(e){
         e.preventDefault()
@@ -34,13 +47,13 @@ const Login = () => {
         }
 
         dispatch(login(loginFields))
-            .then(() => {
-                history.push("/")
-                window.location.reload()
-            })
-
+        clearAlert()
         setUsername('')
         setPassword('')
+    }
+
+    if(isLoggedIn) {
+        return <Redirect to="/" />;
     }
 
     return (
@@ -55,7 +68,8 @@ const Login = () => {
                     type="text"
                     name="username"
                     placeholder="Username"
-                    onChange={(e) => setUsername(e.target.value)}
+                    onChange={handleUsernameInput}
+                    onClickCapture={clearAlert}
                     />
                 </div>
                 <div>
@@ -65,12 +79,16 @@ const Login = () => {
                     type="password"
                     name="password"
                     placeholder="Password"
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={handlePasswordInput}
+                    onClickCapture={clearAlert}
                     />
                 </div>
                 <br/>
                 <button type="submit">Log in</button>
             </form>
+            <div>
+                <StyledTitle>{message}</StyledTitle>
+            </div>
         </StyledLoginForm>
         </>
     )

@@ -7,7 +7,7 @@ const register = async newUser => {
         const response = await axios.post(baseRegisterURL, newUser)
         return response.data
     } catch (error) {
-        console.error(error)
+        return error.response
     }
 }
 
@@ -21,7 +21,7 @@ const login = async credentials => {
 
     return response.data
     } catch (error) {
-        console.error(error)
+        return error.response
     }
 }
 
