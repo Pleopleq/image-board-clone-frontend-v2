@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { login } from '../actions/auth'
 import styled from 'styled-components';
-import { clearMessage } from '../actions/message';
+import { clearMessage, setMessage } from '../actions/message';
 
 const StyledLoginForm = styled.section`
     background: #001f3f;
@@ -22,8 +22,9 @@ const StyledLabel = styled.label`
 const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const { isLoggedIn } = useSelector(state => state.auth);
+    const { isLoggedIn } = useSelector(state => state.auth)
     const { message } = useSelector(state => state.message)
+
     const dispatch = useDispatch()
 
     function handleUsernameInput(e) {
@@ -34,9 +35,13 @@ const Login = () => {
         setPassword(e.target.value)
     }
 
-    function clearAlert() {
+    const clearAlert = useCallback(() =>  {
         dispatch(clearMessage())
-    }
+    }, [dispatch])
+
+    useEffect(() => {
+        clearAlert()
+    }, [clearAlert])
 
     function onLoginSubmit(e){
         e.preventDefault()
@@ -44,6 +49,10 @@ const Login = () => {
         const loginFields = {
             username,
             password
+        }
+
+        if (loginFields.username === "" && loginFields.password === "") {
+            return dispatch(setMessage("Please fill all the inputs."))
         }
 
         dispatch(login(loginFields))

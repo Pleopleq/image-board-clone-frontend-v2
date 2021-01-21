@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { register } from '../actions/auth'
@@ -27,9 +27,14 @@ const Register = () => {
 
     const dispatch = useDispatch()
 
-    function clearAlert() {
+    const clearAlert = useCallback(() =>  {
         dispatch(clearMessage())
-    }
+    }, [dispatch])
+
+    useEffect(() => {
+        clearAlert()
+    }, [clearAlert])
+
 
     function onRegisterSubmit(e){
         e.preventDefault()

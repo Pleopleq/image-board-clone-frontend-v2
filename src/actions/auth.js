@@ -35,24 +35,35 @@ export const userLogout = () => ({
 
 export const register = newUserInfo => async (dispatch) => {
     const response = await authService.register(newUserInfo)
-    if(response.data.error) {
-        const error = errorFormatter(response.data.error) 
-        dispatch(userLoginFail())
-        dispatch(setMessage(errorHandler(error)))
-        return
+
+    if(response.data) {
+        let minCharError = errorFormatter(response.data.error, " ", "minimum")
+        let uniqueUserError = errorFormatter(response.data.error, " ", "unique.")
+        if(minCharError) {
+            dispatch(userLoginFail())
+            dispatch(setMessage(errorHandler("minimumChar", minCharError)))
+            minCharError = false
+            return
+        } else if(uniqueUserError) {
+            dispatch(userLoginFail())
+            dispatch(setMessage(errorHandler("uniqueUser", uniqueUserError)))
+            uniqueUserError = false
+            return
+        }
     }
 
-    dispatch(registerAction(response))
+    dispatch(registerAction(response)) 
 }
 
 export const login = credentials => async (dispatch) => {
     const response = await authService.login(credentials)
 
-    /* if(response === undefined) {
+    if(response.data) {
         dispatch(userLoginFail())
         dispatch(setMessage("Invalid username or password."))
         return   
-    } */
+    }
+
     dispatch(userLogin(response))
 }
 
