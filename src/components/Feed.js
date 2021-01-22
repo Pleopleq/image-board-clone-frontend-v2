@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchPosts, savePost, addPost } from '../actions/posts'
+import { fetchPosts, savePost } from '../actions/posts'
 import Post from "./Post";
 import styled from 'styled-components';
 import PostForm from './PostForm';
@@ -16,10 +16,6 @@ const StyledFeed = styled.section`
 const Feed = () => {
     const posts = useSelector((state) => state.posts.posts)
     const dispatch = useDispatch()
-
-    const onAddPost = (post) => {
-    dispatch(addPost(post))
-    }
 
     const onSave = (post, token) => {
     dispatch(savePost(post, token))
@@ -51,7 +47,7 @@ const Feed = () => {
 
     return (
         <>
-        <PostForm addPost={onAddPost} savePost={onSave}></PostForm>
+        <PostForm savePost={onSave}></PostForm>
         <hr/>
         <StyledFeed>
             {handlePostRender()}

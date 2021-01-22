@@ -15,6 +15,10 @@ export const registerAction = (response) => ({
     payload: { user: response }
 })
 
+export const registerFail = () => ({
+    type: REGISTER_FAIL
+})
+
 export const userLogin = (response) => ({
     type: LOGIN_SUCCESS,
     payload: { user: response }
@@ -40,24 +44,24 @@ export const register = newUserInfo => async (dispatch) => {
         let minCharError = errorFormatter(response.data.error, " ", "minimum")
         let uniqueUserError = errorFormatter(response.data.error, " ", "unique.")
         if(minCharError) {
-            dispatch(userLoginFail())
+            dispatch(registerFail())
             dispatch(setMessage(errorHandler("minimumChar", minCharError)))
             minCharError = false
             return
         } else if(uniqueUserError) {
-            dispatch(userLoginFail())
+            dispatch(registerFail())
             dispatch(setMessage(errorHandler("uniqueUser", uniqueUserError)))
             uniqueUserError = false
             return
         }
     }
-
+    
     dispatch(registerAction(response)) 
 }
 
 export const login = credentials => async (dispatch) => {
     const response = await authService.login(credentials)
-
+    
     if(response.data) {
         dispatch(userLoginFail())
         dispatch(setMessage("Invalid username or password."))

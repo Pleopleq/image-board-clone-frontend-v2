@@ -1,7 +1,7 @@
 export function errorFormatter(error, splitBy, keyWord){
     const formattedError = error.split(splitBy)
-    const itContains = formattedError.includes(keyWord)
-    return itContains
+    const itContainsError = formattedError.includes(keyWord)
+    return itContainsError
 }
 
 export function errorHandler (errorName, isError) {
