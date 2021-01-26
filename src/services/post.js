@@ -22,7 +22,8 @@ const addNewPost = async (newPost, token) => {
     try {
         const response = await axios.post( baseURL, newPost , {
             headers: {
-              'Authorization': headers
+              'Authorization': headers,
+              'Content-Type': 'multipart/form-data'
             }
           })
         return response.data

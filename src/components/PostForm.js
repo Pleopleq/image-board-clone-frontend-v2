@@ -19,6 +19,8 @@ const StyledPostForm = styled.section`
 const PostForm = ({ savePost }) => {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
+    const [image, setImage] = useState(null)
+
     const { isLoggedIn, user } = useSelector(state => state.auth)
     const { message } = useSelector(state => state.message)
     const dispatch = useDispatch()
@@ -31,21 +33,26 @@ const PostForm = ({ savePost }) => {
         clearAlert()
     }, [clearAlert])
 
+    function onImageHandler(e){
+        e.preventDefault()
+        setImage(e.target.files[0])
+    }
+
     function handleFormSubmit(e) {
         e.preventDefault()
 
-        const post = {
-            title,
-            likes: 0,
-            content: body,
-            author: user.loggedUser.username,
-            owner: user.loggedUser._id
-        }
-
-        if(post.title === "" && post.content === ""){
+        if(title === "" || body === ""){
             return dispatch(setMessage("Please fill the 'Title' and 'Body' fields."))
         }
+        
+        let post = new FormData()
 
+        post.append("title", title)
+        post.append("content", body)
+        post.append("postImage", image)
+        post.append("author", user.loggedUser.username)
+        post.append("owner", user.loggedUser._id)
+        
         savePost(post, user.token)
         setTitle('')
         setBody('')
@@ -79,6 +86,14 @@ const PostForm = ({ savePost }) => {
                     onClickCapture={clearAlert}
                     />
                 </div>
+                <div>
+                    <input
+                    type="file" 
+                    name="postImage"  
+                    accept="image/*"
+                    onChange={onImageHandler}
+                    />
+                 </div>
                 <br/>
                 <button type="submit">Submit</button>
             </form>

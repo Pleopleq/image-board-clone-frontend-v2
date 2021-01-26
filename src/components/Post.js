@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import post from '../services/post'
 
 const StyledPost = styled.div`
     display: flex;
