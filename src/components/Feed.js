@@ -16,7 +16,6 @@ const StyledFeed = styled.section`
 const Feed = () => {
     const posts = useSelector((state) => state.posts.posts)
     const dispatch = useDispatch()
-
     const onSave = (post, token) => {
     dispatch(savePost(post, token))
     }
@@ -33,15 +32,16 @@ const Feed = () => {
         if(!posts){
             return null
         } else {
-            return (posts.map((post, index) =>
-            <Post 
+        return (posts.map((post, index) =>
+           <Post 
             key={index}
             postId={post.id}
             title={post.title}
+            image={`http://localhost:3001/api/posts/${post._id}/image`}
             author={post.author}
             postBody={post.content}
-            ></Post>
-            ))
+            ></Post>)
+            )
         }
     }
 

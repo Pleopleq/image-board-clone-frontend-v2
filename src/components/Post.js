@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import post from '../services/post'
 
 const StyledPost = styled.div`
     display: flex;
@@ -16,11 +17,11 @@ const StyledPostImage = styled.img`
     width: 50%
 `
 
-const Post = ({ postId, title, author, postBody }) => {
+const Post = ({ postId, title, author, postBody, image}) => {
     return (
             <StyledPost key={postId}>
                 <h1>{title}</h1>
-                <StyledPostImage src="https://www.colorcombos.com/images/colors/010101.png"></StyledPostImage>
+                <StyledPostImage src={image}></StyledPostImage>
                 <p>Author: {author}</p>
                 <p>{postBody}</p>
             </StyledPost>
