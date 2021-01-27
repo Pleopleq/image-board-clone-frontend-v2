@@ -10,9 +10,8 @@ import {
 import {errorFormatter, errorHandler} from '../utils/errorHandler'
 import authService from '../services/auth'
 
-export const registerAction = (response) => ({
-    type: REGISTER_SUCCESS,
-    payload: { user: response }
+export const registerAction = () => ({
+    type: REGISTER_SUCCESS
 })
 
 export const registerFail = () => ({
@@ -56,7 +55,7 @@ export const register = newUserInfo => async (dispatch) => {
         }
     }
     
-    dispatch(registerAction(response)) 
+    dispatch(registerAction()) 
 }
 
 export const login = credentials => async (dispatch) => {

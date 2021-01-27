@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Profile from './components/Profile'
 import Navbar from "./components/Navbar"
 import Feed from "./components/Feed";
 import Register from "./components/Register";
@@ -12,6 +13,7 @@ const App = () => {
       <Navbar></Navbar>
       <Switch>
         <Route path="/" exact component={Feed}></Route>
+        <Route path="/profile" component={Profile}></Route>
         <Route path="/register" component={Register}></Route>
         <Route path="/login" component={Login}></Route>
       </Switch>

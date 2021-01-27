@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import { register } from '../actions/auth'
 import { clearMessage, setMessage } from '../actions/message';
 import styled from "styled-components";
@@ -24,6 +24,7 @@ const Register = () => {
     const [password, setPassword] = useState('')
     const { isLoggedIn } = useSelector(state => state.auth);
     const { message } = useSelector(state => state.message)
+    let history = useHistory();
 
     const dispatch = useDispatch()
 
@@ -52,6 +53,7 @@ const Register = () => {
         clearAlert()
         setUsername('')
         setPassword('')
+        history.push("/")
     }
 
     if(isLoggedIn) {
