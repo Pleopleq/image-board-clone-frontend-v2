@@ -36,8 +36,9 @@ const Feed = () => {
            <Post 
             key={index}
             postId={post.id}
+            id={post._id}
             title={post.title}
-            image={`http://localhost:3001/api/posts/${post._id}/image`}
+            image={post.image}
             author={post.author}
             postBody={post.content}
             ></Post>)

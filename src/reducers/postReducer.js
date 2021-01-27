@@ -14,7 +14,7 @@ export default function postReducer(state = initialState, action) {
         case NEW_POST:
             return {
                 ...state,
-                posts: [...state.posts, payload]
+                posts: [payload, ...state.posts]
             }
         default:
             return state;

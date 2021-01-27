@@ -16,11 +16,18 @@ const StyledPostImage = styled.img`
     width: 50%
 `
 
-const Post = ({ postId, title, author, postBody, image}) => {
+const Post = ({ postId, title, author, postBody, image, id }) => {
+    function handleNoImage(){
+        if(image === undefined){
+            return null
+        }
+        return <StyledPostImage src={`http://localhost:3001/api/posts/${id}/image`}></StyledPostImage>
+    }
+    
     return (
             <StyledPost key={postId}>
                 <h1>{title}</h1>
-                <StyledPostImage src={image}></StyledPostImage>
+                {handleNoImage()}
                 <p>Author: {author}</p>
                 <p>{postBody}</p>
             </StyledPost>
