@@ -41,6 +41,7 @@ const Feed = () => {
             image={post.image}
             author={post.author}
             postBody={post.content}
+            owner={post.owner}
             ></Post>)
             )
         }

@@ -16,7 +16,21 @@ const StyledPostImage = styled.img`
     width: 50%
 `
 
-const Post = ({ postId, title, author, postBody, image, id }) => {
+const StyledUserContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+`
+
+const StyledAuthorThump = styled.img`
+    width: 25%;
+    border-radius: 2rem;
+    margin-right: 1rem;
+`
+
+const Post = ({ postId, title, author, postBody, image, id , owner}) => {
+
     function handleNoImage(){
         if(image === undefined){
             return null
@@ -28,7 +42,10 @@ const Post = ({ postId, title, author, postBody, image, id }) => {
             <StyledPost key={postId}>
                 <h1>{title}</h1>
                 {handleNoImage()}
-                <p>Author: {author}</p>
+                <StyledUserContainer>
+                    <StyledAuthorThump src={`http://localhost:3001/api/users/${owner}/avatar`} alt="author thumbnail"></StyledAuthorThump>
+                    <p>{author}</p>
+                </StyledUserContainer>
                 <p>{postBody}</p>
             </StyledPost>
     )
