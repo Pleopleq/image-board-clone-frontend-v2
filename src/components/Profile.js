@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect, useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchAvatar } from '../actions/profile'
+import Avatar from './Avatar'
 import getAvatar from '../services/user'
 import styled from 'styled-components'
 
@@ -27,34 +29,29 @@ const StyledFormVisible = styled.p`
     }
 `
 
-const StyledAvatar = styled.img`
-    width: 20%;
-`
 const StyledHidden = styled.form`
     display: block;
 `
 
 const Profile = () => {
-    const [avatar, setAvatar] = useState('')
     const { user } = useSelector(state => state.auth)
+    const { avatar } = useSelector(state => state.profile)
     const userId = user.loggedUser._id
+    const dispatch = useDispatch()
+    
+    const onSetAvatar = useCallback(() => {
+        dispatch(fetchAvatar(userId));
+    }, [dispatch, userId]);
 
     useEffect(() => {
-        setAvatar(getAvatar(userId))
-    },[userId])
-
-    function handleNoImage(){
-        if(avatar === ""){
-            return <StyledAvatar src="http://localhost:3001/blank-profile.jpg"></StyledAvatar>
-        }
-        return <StyledAvatar src={`http://localhost:3001/api/users/${userId}/avatar`}></StyledAvatar>
-    }
+        onSetAvatar()
+    },[onSetAvatar])
 
     return (
         <StyledContainer>
             <StyledProfile>
                 <h1>{user.loggedUser.username}</h1>
-                {handleNoImage()}
+                <Avatar avatar={avatar}></Avatar>
                 <StyledFormVisible>Upload a profile image</StyledFormVisible>
                 <StyledHidden>
                     <input type="file"></input>

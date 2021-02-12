@@ -29,7 +29,7 @@ const StyledAuthorThump = styled.img`
     margin-right: 1rem;
 `
 
-const Post = ({ postId, title, author, postBody, image, id , owner}) => {
+const Post = ({ postId, title, author, postBody, image, id , owner }) => {
 
     function handleNoImage(){
         if(image === undefined){

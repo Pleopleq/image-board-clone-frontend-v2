@@ -48,7 +48,7 @@ const Register = () => {
         if (registerFields.username === "" && registerFields.password === "") {
             return dispatch(setMessage("Please fill all the inputs."))
         }
-
+        
         dispatch(register(registerFields))
         clearAlert()
         setUsername('')

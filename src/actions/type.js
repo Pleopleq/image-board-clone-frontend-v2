@@ -15,3 +15,9 @@ export const LOGOUT = "LOGOUT";
 
 export const SET_MESSAGE = "SET_MESSAGE";
 export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
+
+//PROFILE
+
+export const SET_AVATAR = "SET_AVATAR";
+export const UPLOAD_AVATAR = "UPLOAD_AVATAR";
+export const EDIT_DESCRIPTION = "EDIT_DESCRIPTION";
