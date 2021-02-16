@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
-import usersServices from '../services/user'
 
 const StyledPost = styled.div`
     display: flex;
@@ -31,22 +30,33 @@ const StyledAuthorThump = styled.img`
 `
 
 const Post = ({ postId, title, author, postBody, image, id , owner }) => {
+    const [avatar, setAvatar] = useState('')
 
-    function handleNoImage(){
+    const handleNoImage = () => {
         if(image === undefined){
             return null
         }
         return <StyledPostImage src={`http://localhost:3001/api/posts/${id}/image`}></StyledPostImage>
     }
 
-    //ADD LOCAL STATE FOR MANAGING THE THUMBNAIL
+    const handleAvatar = useCallback(async () => {
+        const response = await fetch(`http://localhost:3001/api/users/${owner}/avatar`)
+        if(response.ok){
+            return setAvatar(`http://localhost:3001/api/users/${owner}/avatar`)
+        }
+        return setAvatar('http://localhost:3001/blank-profile.jpg')
+    },[owner])
 
-    return (
+    useEffect(() => {
+        handleAvatar()
+    },[handleAvatar])
+
+        return (
             <StyledPost key={postId}>
                 <h1>{title}</h1>
                 {handleNoImage()}
                 <StyledUserContainer>
-                    <StyledAuthorThump src={`http://localhost:3001/api/users/${owner}/avatar`} alt="author thumbnail"></StyledAuthorThump>
+                <StyledAuthorThump src={avatar} alt="author thumbnail"></StyledAuthorThump>
                     <p>{author}</p>
                 </StyledUserContainer>
                 <p>{postBody}</p>

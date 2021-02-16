@@ -35,7 +35,6 @@ const StyledHidden = styled.form`
 
 const Profile = () => {
     const { user } = useSelector(state => state.auth)
-    const { avatar } = useSelector(state => state.profile)
     const userId = user.loggedUser._id
     const dispatch = useDispatch()
     
@@ -51,7 +50,7 @@ const Profile = () => {
         <StyledContainer>
             <StyledProfile>
                 <h1>{user.loggedUser.username}</h1>
-                <Avatar avatar={avatar}></Avatar>
+                <Avatar id={userId}></Avatar>
                 <StyledFormVisible>Upload a profile image</StyledFormVisible>
                 <StyledHidden>
                     <input type="file"></input>

@@ -20,7 +20,6 @@ const PostForm = ({ savePost }) => {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
     const [image, setImage] = useState(null)
-
     const { isLoggedIn, user } = useSelector(state => state.auth)
     const { message } = useSelector(state => state.message)
     const dispatch = useDispatch()
@@ -44,7 +43,7 @@ const PostForm = ({ savePost }) => {
         if(title === "" || body === ""){
             return dispatch(setMessage("Please fill the 'Title' and 'Body' fields."))
         }
-        
+
         let post = new FormData()
 
         post.append("title", title)
