@@ -15,10 +15,8 @@ const StyledFeed = styled.section`
 
 const Feed = () => {
     const posts = useSelector((state) => state.posts.posts)
-    const avatar = useSelector((state) => state)
     const dispatch = useDispatch()
-    console.log(avatar)
-
+    
     const onSave = (post, token) => {
     dispatch(savePost(post, token))
     }

@@ -12,7 +12,7 @@ const getAll = async () => {
         const response = await axios.get(baseURL)
         return response.data
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
     
 }
@@ -28,7 +28,7 @@ const addNewPost = async (newPost, token) => {
           })
         return response.data
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import usersServices from '../services/user'
 
 const StyledPost = styled.div`
     display: flex;
@@ -37,7 +38,9 @@ const Post = ({ postId, title, author, postBody, image, id , owner }) => {
         }
         return <StyledPostImage src={`http://localhost:3001/api/posts/${id}/image`}></StyledPostImage>
     }
-    
+
+    //ADD LOCAL STATE FOR MANAGING THE THUMBNAIL
+
     return (
             <StyledPost key={postId}>
                 <h1>{title}</h1>
