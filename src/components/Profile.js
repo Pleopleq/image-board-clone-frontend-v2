@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAvatar } from '../actions/profile'
+import { fetchAvatar } from '../redux/actions/profile'
 import Avatar from './Avatar'
 import styled from 'styled-components'
 

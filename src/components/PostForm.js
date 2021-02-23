@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { clearMessage, setMessage } from '../actions/message';
+import { clearMessage, setMessage } from '../redux/actions/message';
 import NeedToBeLogged from './NeedToBeLogged'
 import styled from 'styled-components'
 

@@ -1,8 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import user from '../services/user'
-import usersServices from '../services/user'
-
 
 const StyledAvatar = styled.img`
     width: 20%;

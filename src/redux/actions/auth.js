@@ -7,8 +7,8 @@ import {
     SET_MESSAGE,
 } from "./type";
 
-import {errorFormatter, errorHandler} from '../utils/errorHandler'
-import authService from '../services/auth'
+import {errorFormatter, errorHandler} from '../../utils/errorHandler'
+import authService from '../../services/auth'
 
 export const registerAction = () => ({
     type: REGISTER_SUCCESS

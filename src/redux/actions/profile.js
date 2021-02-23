@@ -1,5 +1,5 @@
 import { SET_AVATAR } from './type'
-import userServices from '../services/user'
+import userServices from '../../services/user'
 
 export const setAvatar = (avatar) => ({
     type: SET_AVATAR,

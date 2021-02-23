@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchPosts, savePost } from '../actions/posts'
+import { fetchPosts, savePost } from '../redux/actions/posts'
 import Post from "./Post";
 import styled from 'styled-components';
 import PostForm from './PostForm';

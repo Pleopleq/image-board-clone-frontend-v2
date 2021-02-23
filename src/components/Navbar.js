@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../actions/auth'
+import { logout } from '../redux/actions/auth'
 import styled from 'styled-components';
 
 const StyledNavbar = styled.nav`

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { login } from '../actions/auth'
+import { login } from '../redux/actions/auth'
 import styled from 'styled-components';
-import { clearMessage, setMessage } from '../actions/message';
+import { clearMessage, setMessage } from '../redux/actions/message';
 
 const StyledLoginForm = styled.section`
     background: #001f3f;

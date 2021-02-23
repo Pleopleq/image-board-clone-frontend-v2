@@ -1,5 +1,5 @@
 import { FETCH_POSTS, NEW_POST } from './type'
-import postServices from '../services/post'
+import postServices from '../../services/post'
 
 export const setPosts = (posts) => ({
     type: FETCH_POSTS,
